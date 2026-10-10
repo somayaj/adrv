@@ -1,0 +1,44 @@
+[package]
+name = "adrv"
+version = "0.1.9"
+edition = "2021"
+license = "MIT"
+description = "Load Architecture Decision Records, build dependency graphs, and serve the adrv web UI"
+readme = "README.md"
+repository = "https://github.com/somayaj/adrv"
+homepage = "https://github.com/somayaj/adrv"
+keywords = ["adr", "architecture", "documentation", "graph", "cli"]
+categories = ["command-line-utilities", "development-tools"]
+exclude = [
+  "/node_modules",
+  "/packages",
+  "/target",
+  "/.git",
+  "/.cursor",
+]
+
+[[bin]]
+name = "adrv"
+path = "src/main.rs"
+
+[lib]
+name = "adrv"
+path = "src/lib.rs"
+
+[dependencies]
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+serde_yaml = "0.9"
+thiserror = "2"
+glob = "0.3"
+regex = "1"
+axum = "0.8"
+tokio = { version = "1", features = ["macros", "rt-multi-thread", "net"] }
+tower-http = { version = "0.6", features = ["fs", "cors"] }
+clap = { version = "4", features = ["derive", "env"] }
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+rust-embed = { version = "8", features = ["mime-guess"] }
+mime_guess = "2"
+dialoguer = "0.11"
+reqwest = { version = "0.12", default-features = false, features = ["blocking", "json", "rustls-tls"] }

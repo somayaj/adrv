@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>adrv</title>
+    <style>
+      :root {
+        --bg: #0c0c0e;
+        --panel: #141418;
+        --border: #2a2a32;
+        --text: #e8e8ed;
+        --muted: #8b8b9a;
+        --accent: #3b82f6;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: system-ui, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+      header {
+        padding: 0.75rem 1rem;
+        border-bottom: 1px solid var(--border);
+        background: var(--panel);
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
+      header h1 {
+        font-size: 1rem;
+        margin: 0;
+        font-weight: 600;
+      }
+      header .meta {
+        font-size: 0.75rem;
+        color: var(--muted);
+      }
+      .tabs button {
+        background: transparent;
+        border: 1px solid var(--border);
+        color: var(--muted);
+        padding: 0.35rem 0.75rem;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 0.75rem;
+      }
+      .tabs button.active {
+        background: rgba(59, 130, 246, 0.15);
+        color: #93c5fd;
+        border-color: rgba(59, 130, 246, 0.35);
+      }
+      main {
+        flex: 1;
+        display: flex;
+        min-height: 0;
+      }
+      aside {
+        width: 14rem;
+        border-right: 1px solid var(--border);
+        background: var(--panel);
+        overflow-y: auto;
+        padding: 0.5rem;
+      }
+      aside button {
+        display: block;
+        width: 100%;
+        text-align: left;
+        border: none;
+        background: transparent;
+        color: var(--text);
+        padding: 0.5rem 0.6rem;
+        border-radius: 8px;
+        cursor: pointer;
+        margin-bottom: 0.25rem;
+        font-size: 0.8rem;
+      }
+      aside button:hover {
+        background: rgba(255, 255, 255, 0.05);
+      }
+      aside button.active {
+        background: rgba(59, 130, 246, 0.12);
+        outline: 1px solid rgba(59, 130, 246, 0.3);
+      }
+      aside .id {
+        font-family: ui-monospace, monospace;
+        font-size: 0.65rem;
+        color: var(--muted);
+      }
+      .stage {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+        min-height: 0;
+      }
+      .view-hint {
+        font-size: 0.7rem;
+        color: var(--muted);
+        padding: 0.35rem 1rem 0;
+      }
+      .detail {
+        padding: 1rem;
+        border-bottom: 1px solid var(--border);
+        background: var(--panel);
+      }
+      .detail h2 {
+        margin: 0.25rem 0 0;
+        font-size: 1.1rem;
+      }
+      .canvas-wrap {
+        flex: 1;
+        position: relative;
+        overflow: hidden;
+        min-height: 280px;
+      }
+      svg {
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+      .error {
+        padding: 2rem;
+        color: #fca5a5;
+      }
+      pre.body {
+        margin: 0.75rem 0 0;
+        font-size: 0.75rem;
+        color: var(--muted);
+        white-space: pre-wrap;
+        max-height: 6rem;
+        overflow: auto;
+      }
+      .badge {
+        font-size: 0.65rem;
+        padding: 0.1rem 0.4rem;
+        border-radius: 4px;
+        background: #27272a;
+        color: var(--muted);
+        margin-left: 0.35rem;
+      }
+      .link-legend {
+        position: absolute;
+        bottom: 12px;
+        left: 12px;
+        z-index: 2;
+        max-width: 280px;
+        padding: 10px 12px;
+        border-radius: 8px;
+        border: 1px solid var(--border);
+        background: rgba(20, 20, 24, 0.95);
+        font-size: 0.7rem;
+        pointer-events: none;
+      }
+      .link-legend h3 {
+        margin: 0 0 8px;
+        font-size: 0.65rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        color: var(--muted);
+      }
+      .link-legend li {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 8px;
+        list-style: none;
+      }
+      .link-legend ul {
+        margin: 0;
+        padding: 0;
+      }
+      .link-legend .swatch {
+        margin-top: 6px;
+        width: 20px;
+        height: 3px;
+        border-radius: 2px;
+        flex-shrink: 0;
+      }
+      .link-legend .name {
+        font-weight: 600;
+        color: #e4e4e7;
+        font-size: 0.75rem;
+      }
+      .link-legend .desc {
+        color: var(--muted);
+        font-size: 0.65rem;
+        line-height: 1.35;
+        margin-top: 2px;
+      }
+      .link-legend .foot {
+        margin-top: 8px;
+        padding-top: 8px;
+        border-top: 1px solid var(--border);
+        font-size: 0.6rem;
+        color: #52525b;
+      }
+      .link-pill {
+        display: inline-block;
+        font-size: 0.65rem;
+        font-weight: 600;
+        padding: 0.15rem 0.45rem;
+        border-radius: 4px;
+        margin-right: 0.35rem;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div>
+        <h1>adrv</h1>
+        <div class="meta" id="summary">Loading…</div>
+      </div>
+      <div class="tabs">
+        <button type="button" data-view="deps" class="active">Dependencies</button>
+        <button type="button" data-view="links">Links</button>
+        <button type="button" data-view="steps">Steps</button>
+        <button type="button" data-view="arch">Architecture</button>
+      </div>
+    </header>
+    <main id="app">
+      <p class="error" id="err" hidden></p>
+    </main>
+    <script src="/app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,179 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji";
+  --color-surface: #0c0c0e;
+  --color-panel: #141418;
+  --color-border: #2a2a32;
+  --color-muted: #8b8b9a;
+  --color-accent: #3b82f6;
+  --animate-enrich-slide: adrv-enrich-slide 1.6s ease-in-out infinite;
+  --animate-hourglass-flip: adrv-hourglass-flip 2.8s ease-in-out infinite;
+  --animate-hourglass-sand-top: adrv-hourglass-sand-top 2.8s ease-in-out infinite;
+  --animate-hourglass-sand-bottom: adrv-hourglass-sand-bottom 2.8s ease-in-out infinite;
+  --animate-hourglass-drip: adrv-hourglass-drip 1.1s ease-in-out infinite;
+}
+
+@layer base {
+  html,
+  body,
+  #root {
+    @apply h-full;
+  }
+
+  body {
+    @apply bg-surface font-sans text-zinc-100 antialiased;
+  }
+}
+
+@keyframes adrv-enrich-slide {
+  0% {
+    transform: translateX(-120%);
+  }
+  100% {
+    transform: translateX(380%);
+  }
+}
+
+@keyframes adrv-hourglass-flip {
+  0%,
+  42% {
+    transform: rotate(0deg);
+  }
+  50%,
+  92% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes adrv-hourglass-sand-top {
+  0%,
+  8% {
+    transform: scaleY(1);
+    opacity: 0.95;
+  }
+  42%,
+  50% {
+    transform: scaleY(0.05);
+    opacity: 0.35;
+  }
+  58%,
+  100% {
+    transform: scaleY(1);
+    opacity: 0.95;
+  }
+}
+
+@keyframes adrv-hourglass-sand-bottom {
+  0%,
+  8% {
+    transform: scaleY(0.08);
+    opacity: 0.35;
+  }
+  42%,
+  50% {
+    transform: scaleY(1);
+    opacity: 0.95;
+  }
+  58%,
+  100% {
+    transform: scaleY(0.08);
+    opacity: 0.35;
+  }
+}
+
+@keyframes adrv-hourglass-drip {
+  0%,
+  100% {
+    opacity: 0.2;
+    transform: translateY(-1px);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(1px);
+  }
+}
+
+@layer components {
+  .adrv-hourglass {
+    @apply inline-block animate-hourglass-flip;
+    transform-origin: center center;
+  }
+
+  .adrv-hourglass-sand-top {
+    transform-origin: 10px 9.5px;
+    @apply animate-hourglass-sand-top;
+  }
+
+  .adrv-hourglass-sand-bottom {
+    transform-origin: 10px 16.5px;
+    @apply animate-hourglass-sand-bottom;
+  }
+
+  .adrv-hourglass-drip {
+    @apply animate-hourglass-drip;
+  }
+
+  .adrv-enrich-bar {
+    @apply h-full w-[38%] rounded-full bg-amber-400 animate-enrich-slide;
+  }
+
+  /* XYFlow defaults to light controls/minimap (white squares on dark UI). */
+  .react-flow {
+    --xy-controls-button-background-color: #141418;
+    --xy-controls-button-background-color-hover: #27272a;
+    --xy-controls-button-color: #a1a1aa;
+    --xy-controls-button-color-hover: #f4f4f5;
+    --xy-controls-button-border-color: #2a2a32;
+    --xy-controls-box-shadow: none;
+    --xy-minimap-background-color: #141418;
+    --xy-minimap-node-background-color: #3b82f6;
+    --xy-minimap-mask-background-color: rgba(12, 12, 14, 0.72);
+    --xy-node-background-color: transparent;
+    --xy-node-border-default: none;
+  }
+
+  .react-flow__attribution {
+    @apply hidden;
+  }
+
+  .react-flow__controls {
+    z-index: 8 !important;
+    @apply overflow-hidden rounded-md border border-border shadow-none;
+  }
+
+  .react-flow__minimap {
+    z-index: 7 !important;
+    @apply overflow-hidden rounded-md border border-border;
+  }
+
+  .react-flow__node {
+    overflow: visible !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+  }
+
+  .react-flow__handle {
+    @apply !h-2 !w-2 !border !border-zinc-600 !bg-zinc-500;
+  }
+
+  .react-flow__node-default {
+    @apply rounded-lg border border-zinc-700 bg-zinc-900 px-3 py-2 text-xs font-semibold text-zinc-100;
+  }
+
+  .react-flow__edge-textbg {
+    fill: #18181b !important;
+    fill-opacity: 0.95 !important;
+  }
+
+  .react-flow__edge-text {
+    @apply text-[11px] font-medium text-zinc-200;
+    fill: #e4e4e7 !important;
+  }
+}
