@@ -4,6 +4,8 @@
 
 Install with Cargo — **no Node.js or npm required**. The `adrv` binary includes a built-in web UI for `adrv serve`.
 
+Contributors: commit messages use [Conventional Commits](CONTRIBUTING.md) (`feat:`, `fix:`, `docs:`, … — not `CN-*` prefixes).
+
 ## Install
 
 ```bash
@@ -129,17 +131,3 @@ use adrv::load_adr_graph;
 let graph = load_adr_graph("docs/adr").expect("load ADRs");
 println!("{} decisions", graph.nodes.len());
 ```
-
-## Developing this repository (npm + Rust)
-
-The npm workspace under `packages/` is **only for contributors** working on the web UI. End users who `cargo install adrv` do not need it.
-
-```bash
-npm install
-npm run dev                    # Vite on :5173, API via @adrv/core
-npm run build -w @adrv/web     # optional: replace embedded UI when running from a git clone
-cargo build --release --target-dir ./target
-./target/release/adrv serve --root ./docs/adr-samples/madr --port 8080 --web ./packages/web/dist
-```
-
-Sample corpora: `docs/adr/` (Tyree-style examples), `docs/adr-samples/madr/` (MADR samples).

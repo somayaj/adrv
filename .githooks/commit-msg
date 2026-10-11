@@ -1,0 +1,25 @@
+#!/bin/sh
+# Conventional Commits — see CONTRIBUTING.md
+
+commit_msg_file="$1"
+subject=$(head -n 1 "$commit_msg_file")
+
+# Reject CN-* / ticket-style prefixes
+case "$subject" in
+  CN-*|cn-*|CN_*|cn_*)
+    echo "commit-msg: do not use CN-* prefixes; use feat:, fix:, docs:, etc. (see CONTRIBUTING.md)"
+    exit 1
+    ;;
+esac
+
+# type(scope)?: description  — description must not be empty
+pattern='^(feat|fix|docs|style|refactor|perf|test|build|ci|chore)(\([a-z0-9._/-]+\))?: .+'
+
+if ! printf '%s' "$subject" | grep -Eq "$pattern"; then
+  echo "commit-msg: subject must match Conventional Commits, e.g. feat: add analyze queue"
+  echo "  got: $subject"
+  echo "  see CONTRIBUTING.md"
+  exit 1
+fi
+
+exit 0

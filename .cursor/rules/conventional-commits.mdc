@@ -1,0 +1,16 @@
+---
+description: Git commit messages must use Conventional Commits (feat, fix, docs, …), not CN-* prefixes.
+alwaysApply: true
+---
+
+# Commit messages
+
+When creating git commits in this repository:
+
+- Use **Conventional Commits**: `feat:`, `fix:`, `docs:`, `style:`, `refactor:`, `perf:`, `test:`, `build:`, `ci:`, `chore:`.
+- Optional scope: `feat(web):`, `fix(serve):`.
+- **Do not** use `CN-XXXX` or other ticket prefixes in the subject.
+- See [CONTRIBUTING.md](../../CONTRIBUTING.md) for examples.
+
+Good: `feat: add per-ADR enrich progress to serve API`  
+Bad: `CN-1234: add enrich progress`
