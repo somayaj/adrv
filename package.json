@@ -11,6 +11,7 @@
     "build:all": "npm run build && cargo build --release",
     "dev": "npm run dev -w @adrv/web",
     "start": "npm run build -w @adrv/core && npm run build -w @adrv/web && cargo run --release --target-dir ./target -- serve --root ./docs/adr --port 8080 --web ./packages/web/dist",
+    "embed-static": "node scripts/sync-embed-static.mjs",
     "screenshots": "node scripts/capture-screenshots.mjs",
     "graph": "node packages/cli/dist/index.js graph",
     "typecheck": "npm run typecheck -w @adrv/core && npm run typecheck -w @adrv/web && npm run typecheck -w @adrv/cli"

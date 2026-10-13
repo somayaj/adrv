@@ -39,6 +39,16 @@ chore: bump adrv to 0.1.10
 - Ticket prefixes like `CN-1234:` in the subject line
 - Vague subjects: `update`, `wip`, `fix stuff`
 
+### Release (maintainers)
+
+Before `cargo publish`, refresh the embedded UI so `cargo install` matches the React app:
+
+```bash
+npm run build -w @adrv/web
+npm run embed-static
+cargo publish --allow-dirty --target-dir ./target
+```
+
 ### Git hook
 
 Enable the commit-msg hook (once per clone):

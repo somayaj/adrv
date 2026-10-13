@@ -1,6 +1,6 @@
 [package]
 name = "adrv"
-version = "0.1.9"
+version = "0.1.10"
 edition = "2021"
 license = "MIT"
 description = "Load Architecture Decision Records, build dependency graphs, and serve the adrv web UI"
